@@ -55,7 +55,10 @@ if (!g.MouseEvent)
 
 
 // Checks for this to see if touch events should be enabled
-modulewindow.ontouchstart = null
+// Add this for WeChat apps
+if (typeof wx === 'object') {
+  modulewindow.ontouchstart = null
+}
 
 var navigator = {
     platform: 'iPhone',
