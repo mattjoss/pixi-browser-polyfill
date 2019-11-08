@@ -12,12 +12,12 @@ if (typeof window !== 'undefined') {
     g = {}
 }
 
-var window;
+var modulewindow;
 
 if (typeof window !== 'undefined') {
-  window = window
+  modulewindow = window
 } else {
-  window = {
+  modulewindow = {
     // Checks for this to see if touch events should be enabled
     ontouchstart: null,
     addEventListener: function(eventName, eventFunction) {
@@ -25,8 +25,8 @@ if (typeof window !== 'undefined') {
     }
   }
   
-  // HACK! Put window on global object for node_modules we depend on
-  g.window = window
+  // HACK! Put window on global object for node_modules we depend on 
+  g.window = modulewindow
 }
 
 
@@ -55,7 +55,7 @@ if (!g.MouseEvent)
 
 
 // Checks for this to see if touch events should be enabled
-window.ontouchstart = null
+modulewindow.ontouchstart = null
 
 var navigator = {
     platform: 'iPhone',
@@ -67,12 +67,12 @@ if (g.navigator) {
     navigator = g.navigator;
 }
 
-if (!window.navigator) {
-    window.navigator = navigator
+if (!modulewindow.navigator) {
+  modulewindow.navigator = navigator
 }
 
 console.log('>>> new window')
-console.log(window)
+console.log(modulewindow)
 
 function Document() { }
 
@@ -99,11 +99,11 @@ Document.prototype.addEventListener = function(eventName, eventFunction) {
 
 var document = new Document();
 
-if (window.document) {
-  document = window.document
+if (modulewindow.document) {
+  document = modulewindow.document
 } else {
   document = new Document();
-  window.document = document
+  modulewindow.document = document
 }
 
 
@@ -117,7 +117,7 @@ if (window.document) {
 // }
 
 module.exports = {
-    window: window,
+    window: modulewindow,
     navigator: navigator,
     document: document,
     TouchEvent: g.MouseEvent,
