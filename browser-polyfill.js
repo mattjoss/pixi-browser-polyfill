@@ -82,6 +82,7 @@ function Document() { }
 Document.prototype.createElement = function(elementName) {
 	console.log('Create Element ' + elementName)
 	return {
+      pixiBrowserPolyfilled: true,
 	    getContext: function(contextType) {
 	        console.log('getContext ' + contextType)
 	        return {
